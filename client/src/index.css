@@ -4,12 +4,6 @@
   box-sizing: border-box;
  }
 
- /* body{
-  background-image: url('./components/assets/from1.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 70vh;
- } */
 .heading{
   text-align: center;
   font-size: 2em;

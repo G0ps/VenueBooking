@@ -18,11 +18,13 @@ function Register() {
         console.log('Contact:', contact);       
         console.log('Date of Join:', date);
 
-        axios.post(`https://0abf-103-130-90-210.ngrok-free.app/api/auth/register` , {
+        axios.post(`${import.meta.env.VITE_URL}api/auth/register` , {
             "name" : username,
             "password" : password,
             "email" : email,
             "contactNumber":contact
+        },{
+            withCredentials: true,
         }).then(res => console.log(res))
         .catch(err => console.log(err.message));
         // Reset the form fields after submission   
