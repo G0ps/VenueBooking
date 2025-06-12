@@ -1,0 +1,13 @@
+import { createTransport } from "nodemailer";
+
+// Create a test account or replace with real credentials.
+const transporter = createTransport({
+  host: "smtp-relay.brevo.com",
+  port: 587,// true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD,
+  },
+});
+
+export default transporter;
