@@ -22,7 +22,8 @@ function Register() {
             "name" : username,
             "password" : password,
             "email" : email,
-            "contactNumber":contact
+            "contactNumber":contact,
+            "date": date
         },{
             withCredentials: true,
         }).then(res => console.log(res))
