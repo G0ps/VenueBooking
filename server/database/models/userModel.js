@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import {v4 as UUIDV4} from "uuid"
 
 const userSchema = new mongoose.Schema({
     name : {type:String , required : true},
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
     resetOtpExpireAt:{type:String , default : ""}
 });
 
-const userModel =mongoose.models.userModel || mongoose.model('user' , userSchema);
+const userModel = mongoose.models.userModel || mongoose.model('user' , userSchema);
 
 export default userModel;
 
