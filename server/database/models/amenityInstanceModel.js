@@ -1,23 +1,22 @@
 import mongoose from "mongoose";
 
 const amenityInstanceSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : true
-    },
-     workingCondition : {
-        type : Boolean,
-        default : true
-     },
-     incharge_id : {
-        type : mongoose.Schema.Types.ObjectId,
-        required : true,
-        ref : "userModel"
-     },
-     description : {
-        type : String,
-        required : true
-     }
+    
+      amenity_id : {
+            type : mongoose.Schema.Types.ObjectId,
+            required : true,
+            ref : "amenity"
+         },
+      data: {
+         type: Map,
+         of: new mongoose.Schema({
+            condition : {type : Boolean  , default : true},
+            Availability : {type : String , enum : ["Taken" , "Available" , "Viewed"] , default : "Available"},
+            description : {type : String}
+         }),
+         required: true
+      }
+   
 });
 
-const amenityInstanceModel = mongoose.model('amenity_instance' , amenityInstanceSchema);
+export const amenityInstanceModel = mongoose.model('amenity_instance' , amenityInstanceSchema);

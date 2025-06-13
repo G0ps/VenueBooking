@@ -7,6 +7,8 @@ import ngrok from 'ngrok';
 import * as mongoDb from './database/mongoDb.js';
 import authRouter from "./routes/authRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import venueRouter from "./routes/venueRoutes.js";
+import amenityRouter from "./routes/amenityRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -22,6 +24,8 @@ app.use(cookieParser());
 app.get('/', (req, res) => {res.send("Hello from Backend"); console.log("Frontend connected")});
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/venues' , venueRouter);
+app.use('/api/amenities' , amenityRouter);
 
 // DB Connect
 mongoDb.connect();
