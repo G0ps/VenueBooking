@@ -40,3 +40,19 @@ export const addAmenity = async(req , res) => {
     return res.json({success : true , message : "Amenity added"});
     }catch(err){return res.json({success : false , error : err.message});}
 }
+
+export const deleteAmenity =async(req,res)=>{
+    const{ amenityId }=req.body;
+    if(!amenityId){
+        return res.json({ success: false, message:"not found"});
+    }
+    try{
+        await amenityModel.findOneAndDelete({_id: amenityId});
+        return res.json({ success:true,message:"amenity deleted"});
+        
+    }
+    catch(err){
+        return res.json({ success: false, message:"not found"});
+
+    }
+}
