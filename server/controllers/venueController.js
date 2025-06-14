@@ -30,11 +30,8 @@ export const addVenue = async (req , res , next) => {
     }
 }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 65916028ac4d94ed75c0498f017bec45125f8d97
 //delete venue
 export const deleteVenue = async (req , res) => {
     const {venueId} = req.body;
@@ -49,10 +46,6 @@ export const deleteVenue = async (req , res) => {
         return res.json({success : true , message : "Done deleting"});
     }catch(error){return res.json({success : false , error : error.message})};
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 65916028ac4d94ed75c0498f017bec45125f8d97
 
 
 
