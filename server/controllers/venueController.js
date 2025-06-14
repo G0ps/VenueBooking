@@ -30,7 +30,20 @@ export const addVenue = async (req , res , next) => {
     }
 }
 
-//add amenity to the Venue // hello
+//delete venue
+export const deleteVenue = async (req , res) => {
+    const {venueId} = req.body;
+
+    if(!venueId)
+    {
+        return res.json({sucess : false , message : "VenueId missing"});
+    }
+
+    try{
+        await venueModel.findOneAndDelete({_id : venueId});
+        return res.json({success : true , message : "Done deleting"});
+    }catch(error){return res.json({success : false , error : error.message})};
+}
 
 
 

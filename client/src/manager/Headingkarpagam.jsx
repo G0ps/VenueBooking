@@ -2,7 +2,7 @@ import React from 'react'
 
 function Headingkarpagam() {
   return (
-    <div>Headingkarpagam</div>
+    <div classname='headingkarpagam'>Headingkarpagam</div>
   )
 }
 
