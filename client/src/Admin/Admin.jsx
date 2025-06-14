@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AdminKarpagam from './AdminKarpagam';
+import AdminSidebar from './AdminSidebar'; 
+import Adminlogo from './Adminlogo';
+import './Admin.css';
+// Dummy components to render (replace with your real components)
+// import AddUsers from './AddUsers';
+// import ViewUsers from './ViewUsers';
 
 function Admin() {
-  const [res, setRes] = useState(null); // null → loading, true → success, false → denied
+  const [res, setRes] = useState(null);
+  const [activeComponent, setActiveComponent] = useState('dashboard');
 
   useEffect(() => {
     const verifyAdmin = async () => {
       try {
-        const response = await axios.post(`${import.meta.env.VITE_URL}api/auth/verifyAdmin`, {
-          
-          headers: {
-            'Content-Type': 'application/json'
+        const response = await axios.post(
+          `${import.meta.env.VITE_URL}api/auth/verifyAdmin`,
+          {
+            headers: { 'Content-Type': 'application/json' },
+            token: localStorage.getItem('token'),
           },
-          token : localStorage.getItem('token')
-        },{
-          withCredentials: true
-        }
-      );
+          { withCredentials: true }
+        );
 
         setRes(response.data.success);
       } catch (err) {
@@ -26,7 +32,20 @@ function Admin() {
     };
 
     verifyAdmin();
-  }, []); // run only once when component mounts
+  }, []);
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      // case 'add-users': return <AddUsers />;
+      case 'view-users': return <div>Welcome to Admin view users</div>;
+      case 'add-users' : return <div>Welcome to Admin Add Users</div>;
+      case 'add-venues' : return <div>Welcome to Admin Add Venues</div>;
+      case 'view-venues' : return <div>Welcome to Admin View Venues</div>;
+      case 'add-amenities' : return <div>Welcome to Admin add amenities</div>;
+      case 'view-amenities' : return <div>Welcome to Admin View amenities</div>;
+      default: return <div>Welcome to Admin Dashboard</div>;
+    }
+  };
 
   if (res === null) {
     return <h2>Loading...</h2>;
@@ -36,8 +55,12 @@ function Admin() {
     <div>
       {res ? (
         <div>
-          <h1>Welcome to Admin Page</h1>
-          <p>You have admin privileges.</p>
+          <AdminKarpagam />
+          <Adminlogo />
+          <AdminSidebar onSelect={setActiveComponent} />
+          <div className="admin-content">
+            {renderComponent()}
+          </div> 
         </div>
       ) : (
         <div>
