@@ -1,0 +1,74 @@
+
+
+.AdminKarpagam{
+    text-align: center;
+    /* background-color: aquamarine; */
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 20%;
+    width : 80%;
+}
+
+.Sidebar{
+    width: 20%;
+    height: 100vh;
+    float: left;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.VenueBooking{
+    text-align: center;
+    background-color: aquamarine;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.value{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    border: 2px solid black;
+    width : 80%;
+    border-radius: 15px;
+}
+
+.adminlogo{
+    position: relative;
+    text-align: right;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 5px;
+    bottom: 3ch;
+    /* background-color: aquamarine; */
+}
+
+.adminlogo img{
+    width: 100px;
+    height: 100px;
+    margin-right: 37px;
+    border-radius: 50%;
+}
+
+.adminlogo-text{
+    position: relative;
+    margin-right: 1px;
+    color: rgb(219, 16, 16);
+    bottom: 55px;
+}
+
+.admin-content{
+    position: relative;
+    /* background-color: red; */
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 20%;
+    width : 80%;
+    height: 70vh;
+    bottom: 100px;
+}
