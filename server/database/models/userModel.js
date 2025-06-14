@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     email: {type:String , required : true , unique: true},
     password: {type:String , required : true},
     contactNumber:{type:String , required:true},
-    role:{type : String, enum:['FACULTY' , 'PRINCIPAL' , 'USER'] , default : 'USER'},
+    role:{type : String, enum:['FACULTY' , 'PRINCIPAL' , 'USER' , 'MANAGER' , 'ADMIN'] , default : 'USER'},
     joiningDate : {type : Date , deafult : Date.now},
 
     isEmailVerified : {type:Boolean , default:false},
