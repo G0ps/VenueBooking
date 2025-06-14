@@ -1,6 +1,9 @@
 import amenityModel from '../database/models/amenityModel.js'
 import {amenityInstanceModel} from '../database/models/amenityInstanceModel.js'
 export const addAmenity = async(req , res) => {
+
+    console.log("New Amenity Add request came in");
+
     const {amenity_name , checklist , description , newAmenityInstances} = req.body;
 
     if(!amenity_name)
@@ -24,7 +27,8 @@ export const addAmenity = async(req , res) => {
 
     if(newAmenityInstances)
     {
-        console.log("Amenity Instances : ",newAmenityInstances);
+        // console.log("Amenity Instances : ",newAmenityInstances);
+        console.log("With amenity instances enclosed");
         const newInstances = new amenityInstanceModel({
             amenity_id : newAmenity._id,
             data : newAmenityInstances
@@ -32,6 +36,7 @@ export const addAmenity = async(req , res) => {
         await newInstances.save();
     }
 
+    console.log("Amenity Added Successfully");
     return res.json({success : true , message : "Amenity added"});
     }catch(err){return res.json({success : false , error : err.message});}
 }

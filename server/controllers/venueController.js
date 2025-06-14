@@ -1,8 +1,8 @@
 import venueModel from "../database/models/venueModel.js";
 
-// add venue
-export const addVenue = async (req , res) => {
-    const {venue_name , capacity , manager_id} = req.body;
+// add venue middle ware
+export const addVenue = async (req , res , next) => {
+    const {venue_name , capacity , manager_id , amenityInstances} = req.body;
     const block_name = req.body.block_name || "GENERAL-BLOCK";
 
     if(!venue_name || (!capacity || capacity <= 0)  || !manager_id)
@@ -18,11 +18,19 @@ export const addVenue = async (req , res) => {
             block_name,
             manager_id
         });
+        if(amenityInstances)
+            {
+                newVenue.inBuiltAmenityData = amenityInstances;
+            }
         await newVenue.save();
-
         return res.json({success : true , message : "New Venue Saved"});
     }catch(error)
     {
         return res.json({success : false , error : error.message});
     }
 }
+
+//add amenity to the Venue
+
+
+
