@@ -47,5 +47,44 @@ export const deleteVenue = async (req , res) => {
     }catch(error){return res.json({success : false , error : error.message})};
 }
 
+//update venue
+export const updateVenue = async(req , res) => {
+    
+    const updatedVenue = null;
 
+    if(!venue_name || (!capacity || capacity <= 0)  || !manager_id)
+    {
+        return res.json({success : false , message : "Data not Valid or Incomplete"});
+    }
+
+    try{
+        const existingVenue = await venueModel.findOne({ _id: updatedVenue._id });
+
+        if (!existingVenue) {
+            return res.status(404).json({ success: false, message: "Venue not found" });
+        }
+
+        // Update the fields
+        Object.keys(updatedVenue).forEach((key) => {
+            if (key !== "_id") {
+                existingVenue[key] = updatedVenue[key];
+            }
+        });
+
+        await existingVenue.save();
+
+        res.json({ success: true, message: "Venue updated successfully", venue: existingVenue });
+
+        if(amenityInstances)
+            {
+                newVenue.inBuiltAmenityData = amenityInstances;
+            }
+        await newVenue.save();
+        return res.json({success : true , message : "New Venue Saved"});
+    }catch(error)
+    {
+        return res.json({success : false , error : error.message});
+    }
+
+}
 
