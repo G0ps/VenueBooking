@@ -8,7 +8,7 @@ function AdminSidebar({ onSelect }) {
         <p> Booking</p>
       </div>
       <div className='valuecontainer gap-3 d-flex flex-column align-items-center justify-content-center'>
-        <div className="value" onClick={() => onSelect('add-users')}><i class="bi bi-plus-circle-fill"></i>Add Users</div>
+        <div className="value" onClick={() => onSelect('add-users')}><i className="bi bi-plus-circle-fill"></i>Add Users</div>
         <div className="value" onClick={() => onSelect('view-users')}>View Users</div>
         <div className="value" onClick={() => onSelect('add-venues')}>Add Venues</div>
         <div className="value" onClick={() => onSelect('view-venues')}>View Venues</div>

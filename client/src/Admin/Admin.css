@@ -11,7 +11,7 @@
 }
 
 .Sidebar{
-    width: 20%;
+    width: 18%;
     height: 100vh;
     float: left;
     position: fixed;
@@ -21,6 +21,7 @@
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    box-shadow: 0 0 10px 3px rgba(125, 126, 126, 0.7);
 }
 .VenueBooking img {
     height: 180px;
@@ -30,6 +31,7 @@
 .VenueBooking{
     position: relative;
     bottom: 70px;
+    left : 0px;
 }
 .VenueBooking p{
     position: relative;
@@ -159,8 +161,8 @@
 
 .wrapper2 .input-box input,
 .wrapper2 .input-box select {
-    width: 300px; /* fixed width */
-    height: 30px;
+    width: 320px; /* fixed width */
+    height: 35px;
     margin: 10px 0;
     padding: 0 2px;
     border: none;
@@ -175,11 +177,96 @@
 .wrapper2 .input-box input:focus{
     outline: none;
 }
-
-/* .input-box{
-    border: 2px solid #007bff;
-    box-shadow: 0 0 10px 3px rgba(0, 123, 255, 0.7); 
-} */
+.wrapper2 .input-box input , .wrapper2 .input-box select{
+     border: 1px solid #191a1b;
+}
+.wrapper2 .input-box input:hover {
+     border: 2px solid #007bff;
+     box-shadow: 0 0 10px 3px rgba(111, 178, 250, 0.7);
+}
 
 /* user add css */
 
+/* card css */
+
+.admincard{
+    position: relative;
+    width: 250px;
+    height: 350px;
+    background-color: rgb(9, 9, 9);
+    border-radius: 15px;
+    border: 5px solid rgb(57, 246, 246);
+    color: white;
+    overflow: hidden;  
+}
+.admincard::before {
+    content: " ";
+    position: absolute;
+    background-color: rgb(57, 246, 246);
+    width: 100%;
+    height: 100%;
+    top: -5px;
+    left: -2px;
+    border-radius: 15px;
+    clip-path: circle(60% at 0 0);
+    z-index: 0;
+}
+
+
+
+.cardimg img {
+  position: relative;
+  top: 30px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cardimg.editing img {
+  display: none;
+}
+
+
+.admincard .cardcontent{
+    position: relative;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admincard .cardbutton{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    top: 60px;
+}
+
+.admincard .cardbutton button{
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid rgb(57, 246, 246);
+    background-color: rgb(57, 246, 246);
+    color: rgb(12, 12, 12);
+}
+
+.admincard .cardbutton button:hover{
+    background-color: rgb(12, 12, 12);
+    color: rgb(57, 246, 246);
+}
+
+.admin-card-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 90%;
+    gap: 50px;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    top : 30px
+}
