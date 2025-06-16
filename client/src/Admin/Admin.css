@@ -122,12 +122,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(./Admin/assects/background.jpeg);
-    background-repeat: no-repeat;
+    background-image: url(C:\Users\dhars\OneDrive\Desktop\VBA\VenueBooking\client\src\Admin\assects\img.jpg);
+    background-repeat: no repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    
 }
 
 .wrapper2{
