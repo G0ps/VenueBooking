@@ -31,7 +31,7 @@ export const userAuth = async (req , res , next) => {
 //verify admin
 export const verifyAdmin = async (req , res , next) => {
     const token = req.body.token;
-
+    console.log("Verify admin called");
     if(!token)
     {
         return res.json({success : false , message : "Not authorised login again"});

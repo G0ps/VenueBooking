@@ -14,7 +14,7 @@ export const register = async (req, res) => {
 
     try {
         const existingUser = await userModel.findOne({ email });
-
+        
         if (existingUser) {
             return res.json({ success: false, message: "User Already Exist" });
         }
@@ -36,29 +36,32 @@ export const register = async (req, res) => {
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: email,
-            subject: "Welcome message",
-            text: `Welcome to our KIT Venue Booking, your account is created: ${user._id}`,
+            subject: "Welcome to KIT Venue Booking!",
+            text: `Welcome to KIT Venue Booking! Your account has been created. Your User ID is: ${user._id}`,
             html: `
-                <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;">
-                    <div style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                        <div style="background-color: #4CAF50; padding: 20px; text-align: center; color: white;">
-                            <h1>Welcome to Super Bot!</h1>
-                        </div>
-                        <div style="padding: 20px; color: #333;">
-                            <p>Hi there,</p>
-                            <p>We're excited to have you on board! Your account has been successfully created.</p>
-                            <p><strong>User ID:</strong> ${user._id}</p>
-                            <p>Start exploring and have fun using our bot-powered services.</p>
-                            <br/>
-                            <p style="font-size: 14px; color: #888;">If you have any questions, just reply to this email.</p>
-                        </div>
-                        <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-                            &copy; ${new Date().getFullYear()} KIT Venue Booking. All rights reserved.
-                        </div>
+                <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                    <h2 style="color: #4CAF50; text-align: center;">Welcome to KIT Venue Booking 🎉</h2>
+                    <p>Hi ${user.name || 'there'},</p>
+                    <p>We're excited to have you with us! Your account has been successfully created.</p>
+                    
+                    <p><strong>Your User ID:</strong></p>
+                    <div style="font-size: 16px; font-weight: bold; background-color: #f9f9f9; padding: 10px; border-radius: 5px; display: inline-block;">
+                        ${user._id}
+                    </div>
+
+                    <p style="margin-top: 20px;">You can now start booking venues and managing events easily through our platform.</p>
+
+                    <p style="font-size: 14px; color: #888;">If you have any questions, feel free to reach out to our support team.</p>
+
+                    <p style="font-size: 12px; color: #999;">This is an automated message. Please do not reply directly to this email.</p>
+
+                    <div style="border-top: 1px solid #eee; margin-top: 20px; padding-top: 10px; text-align: center; font-size: 12px; color: #aaa;">
+                        &copy; ${new Date().getFullYear()} KIT Venue Booking. All rights reserved.
                     </div>
                 </div>
             `
         };
+
 
         await transporter.sendMail(mailOptions);
         console.log("mail sent");
@@ -136,11 +139,25 @@ export const sendVerifyOtp = async (req, res) => {
         await user.save();
 
         const mailOption = {
-            from: process.env.SENDER_EMAIL,
-            to: user.email,
-            subject: "Email verification OTP",
-            text: `Your OTP is ${otp}. Verify your account using that OTP`
-        };
+        from: process.env.SENDER_EMAIL,
+        to: user.email,
+        subject: "Email Verification OTP",
+        html: `
+            <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                <h2 style="color: #4CAF50;">Verify Your Email</h2>
+                <p>Hello ${user.name || "User"},</p>
+                <p>Your OTP code is:</p>
+                <div style="font-size: 24px; font-weight: bold; background-color: #f9f9f9; padding: 10px; border-radius: 5px; display: inline-block;" id="otp-value">${otp}</div>
+                <br><br>
+                <button style="padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;"
+                        onclick="navigator.clipboard.writeText('${otp}')">
+                    Copy OTP
+                </button>
+                <p style="font-size: 12px; color: #777;">If you did not request this, please ignore this email.</p>
+            </div>
+        `
+    };
+
 
         await transporter.sendMail(mailOption);
         return res.json({ success: true, message: "OTP sent to email enrolled" });
@@ -213,11 +230,24 @@ export const sendResetOtp = async (req, res) => {
         await user.save();
 
         const mailOption = {
-            from: process.env.SENDER_EMAIL,
-            to: email,
-            subject: "Reset OTP for password",
-            text: `Reset OTP is ${otp}. Reset your password within 10 minutes.`
-        };
+        from: process.env.SENDER_EMAIL,
+        to: email,
+        subject: "Reset OTP for Password",
+        html: `
+            <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                <h2 style="color: #E53935;">Password Reset Request</h2>
+                <p>We received a request to reset your password. Use the OTP below to proceed:</p>
+
+                <input type="text" value="${otp}" readonly
+                    style="font-size: 20px; padding: 10px; width: 100%; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;" />
+
+                <p style="font-size: 14px; color: #555;">Reset your password within <strong>10 minutes</strong>.</p>
+
+                <p style="font-size: 12px; color: #999;">If you didn’t request a password reset, you can safely ignore this email.</p>
+            </div>
+        `
+    };
+
 
         await transporter.sendMail(mailOption);
         return res.json({ success: true, message: "Reset OTP sent Successfully" });
@@ -261,3 +291,46 @@ export const resetPassword = async (req, res) => {
         return res.json({ success: false, message: error.message });
     }
 };
+
+export const updateUser = async(req , res) => {
+    console.log("update request sent ");
+                const {name , email , contactNumber , role} = req.body;
+                const existingUser = await userModel.findOne({email});
+                if(!existingUser)
+                {
+                    return res.json({success : false , message : "User Not Found"});
+                }
+                try{
+                    Object.keys(req.body).forEach((key) => {
+                            existingUser[key] = req.body[key];
+                    });
+                    await existingUser.save();
+                    const mailOptions = {
+                    from: process.env.SENDER_EMAIL,
+                    to: email,
+                    subject: "Your Account Has Been Updated",
+                    html: `
+                        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                            <h2 style="color: #1976D2;">Account Update Notification</h2>
+                            <p>Hi ${name || 'User'},</p>
+                            <p>This is to inform you that your account details have been successfully updated.</p>
+                            <p><strong>Updated Details:</strong></p>
+                            <ul style="line-height: 1.6;">
+                                <li><strong>Name:</strong> ${name}</li>
+                                <li><strong>Email:</strong> ${email}</li>
+                                <li><strong>Contact Number:</strong> ${contactNumber}</li>
+                                <li><strong>Role:</strong> ${role}</li>
+                            </ul>
+                            <p>If you did not request this update, please contact our support team immediately.</p>
+                            <p style="font-size: 12px; color: #888;">This is an automated message. Please do not reply to this email.</p>
+                        </div>
+                    `
+                };
+
+                    await transporter.sendMail(mailOptions);
+                    return res.json({success : true , message : "User updated successfully"});
+                }catch(error){
+                    return res.json({success : false , error : error.message});
+                }
+                
+}
