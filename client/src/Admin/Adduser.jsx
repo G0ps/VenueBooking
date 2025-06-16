@@ -29,11 +29,12 @@ function Adduser() {
             withCredentials: true,
         }).then(res => { 
             console.log(res.data);
+            
         }).then()
     
   }
   return (
-    <div className='admin-container '>
+    <div className=' admin-container '>
       <div className=" d-flux column gap-3 wrapper2">
         <form onSubmit={handleClick}>
           <h1>Add user</h1>

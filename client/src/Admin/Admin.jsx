@@ -4,14 +4,14 @@ import AdminKarpagam from './AdminKarpagam';
 import AdminSidebar from './AdminSidebar'; 
 import Adminlogo from './Adminlogo';
 import Adduser from './Adduser';
+import Admincard from './Admincard';
 import './Admin.css';
-// Dummy components to render (replace with your real components)
-// import AddUsers from './AddUsers';
-// import ViewUsers from './ViewUsers';
 
 function Admin() {
   const [res, setRes] = useState(null);
   const [activeComponent, setActiveComponent] = useState('dashboard');
+  const [selectedCardId, setSelectedCardId] = useState(null);
+
 
   useEffect(() => {
     const verifyAdmin = async () => {
@@ -35,11 +35,38 @@ function Admin() {
     verifyAdmin();
   }, []);
 
+  // display the cards in the veiw user
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_URL}api/user/data/all`,
+          {
+            headers: { 'Content-Type': 'application/json' },
+            token: localStorage.getItem('token'),
+          },
+          { withCredentials: true }
+        );
+        // Handle the response data as needed
+        console.log("Fetched users:", response.data);
+        setUsers(response.data.usersData);
+        // setUsers(prevUsers => prevUsers.filter(user => user.role !== 'ADMIN'));
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   const renderComponent = () => {
     switch (activeComponent) {
-      // case 'add-users': return <AddUsers />;
-      case 'view-users': return <div>Welcome to Admin view users</div>;
       case 'add-users' : return <div><Adduser/></div>;
+      case 'view-users': return <div className='admin-card-container'>{users.map((user) => (
+          <Admincard key={user._id} name={user.name} role={user.role} id ={user._id} selectedId={selectedCardId}
+          setSelectedId={setSelectedCardId} email = {user.email} contactNumber={user.contactNumber} />
+        ))}</div>;
       case 'add-venues' : return <div>Welcome to Admin Add Venues</div>;
       case 'view-venues' : return <div>Welcome to Admin View Venues</div>;
       case 'add-amenities' : return <div>Welcome to Admin add amenities</div>;
