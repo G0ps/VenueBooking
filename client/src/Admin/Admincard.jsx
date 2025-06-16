@@ -39,6 +39,22 @@ function Admincard({
     }
   };
 
+  const handledelete = async () => {
+    try {
+      const res = await axios.delete(`${import.meta.env.VITE_URL}api/user/data/delete`, {
+        data: {
+          token: localStorage.getItem('token'),
+          deleteId: id,
+        },
+      });
+
+      console.log("Deleted successfully:", res.data);
+      setSelectedId(null); // Back to normal view
+    } catch (error) {
+      console.error("Delete error:", error);
+    }
+  }
+
   return (
     <div
       className="admincard-wrapper"
@@ -131,7 +147,7 @@ function Admincard({
           ) : (
             <>
               <button onClick={() => setSelectedId(id)}>Edit</button>
-              <button onClick={() => console.log("Delete clicked")}>Delete</button>
+              <button onClick={() => handledelete(id)}>Delete</button>
             </>
           )}
         </div>
