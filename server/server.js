@@ -15,9 +15,14 @@ const port = process.env.PORT || 8000;
 
 // Middleware
 app.use(express.json());
-app.use(cors({ 
-  origin: true,
-  credentials: true }));
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    // or reflect back the origin to allow all
+    callback(null, origin || true);
+  },
+  credentials: true,
+}));
 app.use(cookieParser());
 
 // Routes
