@@ -66,8 +66,8 @@
 }
 
 .value:hover {
-  border: 2px solid #007bff;
-  box-shadow: 0 0 10px 3px rgba(0, 123, 255, 0.7); /* Blue blur glow */
+  border: 2px solid #7a9cc0;
+  box-shadow: 0 0 10px 3px #b4b4ecb3; /* Blue blur glow */
 }
 
 
@@ -148,7 +148,7 @@
     width: 500px;
     border-radius: 10px;
     border: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(195, 104, 104, 0.5);
     backdrop-filter: blur(10px);
 }
 
@@ -269,4 +269,27 @@
     align-items: center;
     justify-content: center;
     top : 30px
+}
+/* admin venue css */
+.Venue-card{
+    width: 300px;
+    height: 220px;
+    background-color: rgb(9, 9, 9);
+    color: white;
+    border-radius: 15px;
+    border: 5px solid rgb(57, 246, 246);
+    font-size: 17px;
+}
+
+.Venue-card-buttons{
+    position: relative;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    left: 40px;
+}
+.Venue-card-buttons button{
+    width: 80px;
+    border-radius: 10px;
 }

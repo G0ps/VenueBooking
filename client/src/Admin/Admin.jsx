@@ -6,7 +6,7 @@ import Adminlogo from './Adminlogo';
 import Adduser from './Adduser';
 import Admincard from './Admincard';
 import './Admin.css';
-
+import AdminVenuecard from './AdminVenuecard';
 function Admin() {
   const [res, setRes] = useState(null);
   const [activeComponent, setActiveComponent] = useState('dashboard');
@@ -68,7 +68,7 @@ function Admin() {
           setSelectedId={setSelectedCardId} email = {user.email} contactNumber={user.contactNumber} />
         ))}</div>;
       case 'add-venues' : return <div>Welcome to Admin Add Venues</div>;
-      case 'view-venues' : return <div>Welcome to Admin View Venues</div>;
+      case 'view-venues' : return <div><AdminVenuecard/></div>;
       case 'add-amenities' : return <div>Welcome to Admin add amenities</div>;
       case 'view-amenities' : return <div>Welcome to Admin View amenities</div>;
       default: return <div>Welcome to Admin Dashboard</div>;
